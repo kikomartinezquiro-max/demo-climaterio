@@ -1139,7 +1139,12 @@ if (document.readyState === 'loading') {
     const audio = document.getElementById('audioCEC');
 
     if (btn && audio) {
-        btn.addEventListener('click', function(e) {
+            // Plan B: Cualquier clic en la página activa el audio la primera vez
+            document.body.addEventListener('click', function() {
+                if (audio.paused) audio.play();
+            }, { once: true });
+
+            btn.addEventListener('click', function(e) {
             e.preventDefault();
             if (audio.paused) {
                 audio.play().then(() => {
