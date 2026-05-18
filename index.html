@@ -1130,8 +1130,36 @@ if (document.readyState === 'loading') {
   dibujarRadar();
 }
 </script>
-<audio id="audioCEC" src="audio/musica.mp3" loop preload="auto"></audio>
+<audio id="audioCEC" src="audio/musica.mp3" loop preload="auto" volume="1.0"></audio>
 
+<script>
+(function() {
+    const audio = document.getElementById('audioCEC');
+    audio.volume = 1.0; // Forzamos volumen al 100% por código
+
+    const btn = document.querySelector('.audio-toggle') || document.querySelector('.btn-audio') || document.querySelector('[class*="fa-volume"]');
+
+    if (btn && audio) {
+        // Plan B: Cualquier clic activa el sonido
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Esperando clic..."));
+            }
+        }, { once: true });
+
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (audio.paused) {
+                audio.play();
+                btn.classList.add('playing');
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+            }
+        });
+    }
+})();
+</script>
 <script>
 (function() {
     // Buscamos el botón de la menopausia
