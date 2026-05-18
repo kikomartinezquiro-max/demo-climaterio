@@ -1133,3 +1133,26 @@ if (document.readyState === 'loading') {
 
 </body>
 </html>
+<audio id="audioCEC" src="audio/musica.mp3" loop preload="auto"></audio>
+
+<script>
+(function() {
+    // Buscamos el botón de la menopausia
+    const btn = document.querySelector('.audio-toggle') || document.querySelector('.btn-audio');
+    const audio = document.getElementById('audioCEC');
+
+    if (btn && audio) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.classList.add('playing');
+                }).catch(err => console.log("Error:", err));
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+            }
+        });
+    }
+})();
+</script>
