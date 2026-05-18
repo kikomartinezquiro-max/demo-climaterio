@@ -1135,7 +1135,7 @@ if (document.readyState === 'loading') {
 <script>
 (function() {
     // Buscamos el botón de la menopausia
-    const btn = document.querySelector('.audio-toggle') || document.querySelector('.btn-audio') || document.querySelector('i.fa-volume-up')?.parentElement;
+    const btn = document.querySelector('.audio-toggle') || document.querySelector('.btn-audio') || document.querySelector('[class*="fa-volume"]') || document.querySelector('a[href="#"]');
     const audio = document.getElementById('audioCEC');
 
     if (btn && audio) {
